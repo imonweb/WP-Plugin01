@@ -2,11 +2,11 @@
 /*  
 * @package AlecadddPlugin
 */
+namespace Inc;
 
-class AlecadddPluginActivate {
+class Activate {
 
   public static function activate(){
-    echo 'test';
     flush_rewrite_rules();
   }
 }

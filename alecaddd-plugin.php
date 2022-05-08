@@ -15,6 +15,11 @@ Text Domain: alecaddd-plugin
  
 defined( 'ABSPATH' ) or die('Hey, what are you doing here? You silly human!');
  
+if( file_exists( dirname( __FILE__ ) . '/vendor/autoload.php' ) ){
+  require_once dirname( __FILE__ ) . '/vendor/autoload.php';
+}
+
+use Inc\Activate;
 
 if( !class_exists( 'AlecadddPlugin' ) ){
 
@@ -65,8 +70,8 @@ if( !class_exists( 'AlecadddPlugin' ) ){
     }
 
     function activate(){
-      require_once plugin_dir_path( __FILE__ ) . 'inc/alecaddd-plugin-activate.php';
-      AlecadddPluginActivate::activate();
+      // require_once plugin_dir_path( __FILE__ ) . 'inc/alecaddd-plugin-activate.php';
+      Activate::activate();
     }
 
   } // AlecaddPlugin() end
@@ -79,8 +84,8 @@ if( !class_exists( 'AlecadddPlugin' ) ){
     register_activation_hook( __FILE__, array( $alecadddPlugin, 'activate' ) );
     
     // deactivation
-    require_once plugin_dir_path( __FILE__ ) . 'inc/alecaddd-plugin-deactivate.php';
-    register_deactivation_hook( __FILE__, array( 'AlecadddPluginDeactivate', 'deactivate' ) );
+    // require_once plugin_dir_path( __FILE__ ) . 'inc/alecaddd-plugin-deactivate.php';
+    register_deactivation_hook( __FILE__, array( 'Deactivate', 'deactivate' ) );
     
     // uninstall
     // register_uninstall_hook( __FILE__, array( $alecadddPlugin, 'uninstall' ) ); 

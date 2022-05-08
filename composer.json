@@ -1,0 +1,16 @@
+{
+    "name": "imon/alecaddd-plugin",
+    "description": "Awesome starter plugin example",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "Imon",
+            "email": "contact@imonweb.co.uk"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {"Inc\\": "./inc"}
+    }
+}

@@ -2,8 +2,9 @@
 /*  
 * @package AlecadddPlugin
 */
+namespace Inc;
 
-class AlecadddPluginDeactivate {
+class Deactivate {
 
   public static function deactivate(){
     flush_rewrite_rules();
