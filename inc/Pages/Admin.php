@@ -2,11 +2,13 @@
 
 namespace Inc\Pages;
 
+use \Inc\Base\BaseController;
+
 /*  
 * @package AlecadddPlugin
 */
 
-class Admin {
+class Admin extends BaseController {
 
   // function __construct() { }
 
@@ -20,7 +22,8 @@ class Admin {
 
   public function admin_index() {
     // require template
-      // require_once plugin_dir_path( __FILE__ ) . 'templates/admin.php';
-      require_once PLUGIN_PATH . 'templates/admin.php';
+     // require_once plugin_dir_path( __FILE__ ) . 'templates/admin.php';
+      // require_once PLUGIN_PATH . 'templates/admin.php';
+      require_once $this->plugin_path . 'templates/admin.php';
   }
 } // Admin class end here
