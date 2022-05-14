@@ -5,8 +5,8 @@
 
 namespace Inc\Base;
 
-class BaseController {
-  
+class BaseController { 
+
   public $plugin_path;
   public $plugin_url;
   public $plugin;
