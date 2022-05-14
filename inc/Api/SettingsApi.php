@@ -6,7 +6,7 @@
 
 namespace Inc\Api;
 
-class SettingsApi {
+class SettingsApi { 
 
   public $admin_pages = array();
 
@@ -25,23 +25,19 @@ class SettingsApi {
     return $this;
   }
 
-  public function withSubPage( string $title = null ){
-    if( empty($this->admin_pages)){
-      return $this;
-    }
-  }
-
-  public function addAdminMenu(){
-    foreach( $this->admin_pages as $page ){
+  public function addAdminMenu()
+  {
+    foreach( $this->admin_pages as $page){
       add_menu_page( 
         $page['page_title'], 
         $page['menu_title'], 
         $page['capability'], 
         $page['menu_slug'], 
-        $page['callbak'], 
+        $page['callback'], 
         $page['icon_url'], 
-        $page['position'] 
-      );
+        $page['position']
+       );
     }
   }
-} // SettingsApi
+
+} // end class SettingsApi
