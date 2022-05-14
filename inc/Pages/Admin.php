@@ -3,7 +3,7 @@
 namespace Inc\Pages;
 
 use \Inc\Base\BaseController;
-use \Inc\Base\SettingsApi;
+use \Inc\Api\SettingsApi;
 
 
 /*  
@@ -16,18 +16,30 @@ class Admin extends BaseController {
 
   // function __construct() { }
 
+  public $pages = array();
+
   public function __construct(){
+
     $this->settings = new SettingsApi();
+
+    $this->pages =  array(
+      array(
+          'page_title' => 'Alecaddd Plugin', 
+          'menu_title' => 'Alecaddd', 
+          'capability' => 'manage_options', 
+          'menu_slug' => 'alecaddd_plugin', 
+          'callback' => function(){ echo '<h1> Plugin </h1>'; }, 
+          'icon_url' => 'dashicons-store', 
+          'position' => 110
+      )
+    ); 
   }
 
   public function register() {
     //  add_action( 'admin_menu', array( $this, 'add_admin_pages' ) );
 
-    $pages = [
-      'page_title' => 'Alecaddd Plugin', 'Alecaddd', 'manage_options', 'alecaddd_plugin', array( $this, 'admin_index'), 'dashicons-store', 110;
-    ];
-
-    $this->settings->addPages( 'admin' )->register();
+    $this->settings->addPages( $this->pages )->register();
+    // $this->settings->addPages( $this->pages )->withSubPage( 'Dashboard' )->register();
   }
 
   /*
