@@ -4,8 +4,9 @@
  */
 namespace Inc\Pages;
 
-use \Inc\Base\BaseController;
-use \Inc\Api\SettingsApi;
+use Inc\Api\SettingsApi;
+use Inc\Base\BaseController;
+use Inc\Api\Callbacks\AdminCallbacks;
 
 /**
 * 
@@ -14,27 +15,42 @@ class Admin extends BaseController
 {
 	public $settings;
 
+  public $callbacks;
+
 	public $pages = array();
 
 	public $subpages = array();
 
-	public function __construct()
+	public function register() 
 	{
-		$this->settings = new SettingsApi();
+    $this->settings = new SettingsApi();
 
-		$this->pages = array(
+    $this->callbacks = new AdminCallbacks();
+
+    $this->setPages();
+
+    $this->setSubPages();
+
+		$this->settings->addPages( $this->pages )->withSubPage( 'Dashboard' )->addSubPages( $this->subpages )->register();
+	}
+
+  public function setPages(){
+    $this->pages = array(
 			array(
 				'page_title' => 'Alecaddd Plugin', 
 				'menu_title' => 'Alecaddd', 
 				'capability' => 'manage_options', 
 				'menu_slug' => 'alecaddd_plugin', 
-				'callback' => function() { echo '<h1>Alecaddd Plugin</h1>'; }, 
+				'callback' => array($this->callbacks, 'adminDashboard'), 
+        // 'callback' => function() { return require_once( plugin_dir_path( dirname( __FILE__, 2 ) ) . "/templates/admin.php" );  }, 
 				'icon_url' => 'dashicons-store', 
 				'position' => 110
 			)
 		);
+  }
 
-		$this->subpages = array(
+  public function setSubpages(){
+    $this->subpages = array(
 			array(
 				'parent_slug' => 'alecaddd_plugin', 
 				'page_title' => 'Custom Post Types', 
@@ -60,10 +76,5 @@ class Admin extends BaseController
 				'callback' => function() { echo '<h1>Widgets Manager</h1>'; }
 			)
 		);
-	}
-
-	public function register() 
-	{
-		$this->settings->addPages( $this->pages )->withSubPage( 'Dashboard' )->addSubPages( $this->subpages )->register();
-	}
+  }
 }
