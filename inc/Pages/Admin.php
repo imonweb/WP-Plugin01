@@ -90,6 +90,10 @@ class Admin extends BaseController
           "option_group" => "alecaddd_options_group",
           "option_name" => "text_example",
           "callback" => array( $this->callbacks, "alecadddOptionsGroup")
+        ),
+        array(
+          'option_group' => 'alecaddd_options_group',
+          'option_name' => 'first_name'
         )
       );
 
