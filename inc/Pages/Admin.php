@@ -31,6 +31,10 @@ class Admin extends BaseController
 
     $this->setSubPages();
 
+    $this->setSettings();
+		$this->setSections();
+		$this->setFields();
+
 		$this->settings->addPages( $this->pages )->withSubPage( 'Dashboard' )->addSubPages( $this->subpages )->register();
 	}
 
@@ -76,5 +80,67 @@ class Admin extends BaseController
 				'callback' => function() { echo '<h1>Widgets Manager</h1>'; }
 			)
 		);
-  }
-}
+
+   }
+
+    public function setSettings(){
+      
+      $args = array(
+        array(
+          "option_group" => "alecaddd_options_group",
+          "option_name" => "text_example",
+          "callback" => array( $this->callbacks, "alecadddOptionsGroup")
+        )
+      );
+
+      $this->settings->setSettings( $args );
+
+    }
+
+    public function setSections()
+	{
+		$args = array(
+			array(
+				'id' => 'alecaddd_admin_index',
+				'title' => 'Settings',
+				'callback' => array( $this->callbacks, 'alecadddAdminSection' ),
+				'page' => 'alecaddd_plugin'
+			)
+		);
+
+		$this->settings->setSections( $args );
+	}
+
+  public function setFields()
+	{
+		$args = array(
+			array(
+				'id' => 'text_example',
+				'title' => 'Text Example',
+				'callback' => array( $this->callbacks, 'alecadddTextExample' ),
+				'page' => 'alecaddd_plugin',
+				'section' => 'alecaddd_admin_index',
+				'args' => array(
+					'label_for' => 'text_example',
+					'class' => 'example-class'
+				)
+			),
+			array(
+				'id' => 'first_name',
+				'title' => 'First Name',
+				'callback' => array( $this->callbacks, 'alecadddFirstName' ),
+				'page' => 'alecaddd_plugin',
+				'section' => 'alecaddd_admin_index',
+				'args' => array(
+					'label_for' => 'first_name',
+					'class' => 'example-class'
+				)
+			)
+		);
+
+		$this->settings->setFields( $args );
+	}
+
+
+ 
+} // Admin Base Controller
